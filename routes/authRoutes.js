@@ -34,6 +34,7 @@ router.get("/connect_youtube", (req, res) => {
 // OAuth2 callback route
 router.get("/oauth2callback", async (req, res) => {
   const { code } = req.query;
+  // console.log('code ', code)
   const { userCollection } = await getCollections();
   try {
     const { tokens } = await oAuth2Client.getToken(code);
@@ -55,9 +56,9 @@ router.get("/oauth2callback", async (req, res) => {
       );
     } else {
       const newUser = {
-        googleId: decoded.sub,
         accessToken: tokens.access_token,
         refreshToken: tokens.refresh_token,
+        googleId: decoded.sub,
         email: decoded.email,
       };
       await userCollection.insertOne(newUser);

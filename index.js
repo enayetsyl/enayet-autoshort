@@ -31,9 +31,10 @@ app.use(express.urlencoded({ extended: false }));
 
 // CORS configuration
 app.use(cors({
-    origin: ["http://localhost:5173", "https://autoshortsfrontend.vercel.app"],
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    headers: ["Content-Type", "Authorization"]
+  origin: ["http://localhost:5173", "https://autoshortsfrontend.vercel.app", "https://automovies.click",
+    "http://localhost:8001"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  headers: ["Content-Type", "Authorization"]
 }));
 
 // Session configuration
@@ -43,6 +44,10 @@ app.use(session({
     saveUninitialized: true
 }));
 
+// app.use('/', (req, res) => {
+//   console.log('get route hit')
+//   res.send('You can successfully conntected to the backend.')
+// })
 app.use(userRoutes);
 app.use(authRoutes);
 app.use(seriesRoutes);
